@@ -28,13 +28,9 @@ watch(
     {immediate: true},
 )
 
-function renderedHandler(): void {
-  console.log('渲染完成')
-}
+function renderedHandler(): void {}
 
-function errorHandler(): void {
-  console.log('渲染失败')
-}
+function errorHandler(): void {}
 </script>
 
 <template>
