@@ -11,6 +11,10 @@
 <a href="https://github.com/SmallTeddy/vue-files-preview" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/SmallTeddy/vue-files-preview?style=social"></a>
 </p>
 
+## 📖 Building for Node
+<p> 1. Run in terminal: tsc </p>
+<p> 2. Run in terminal : npm run build </p>
+
 ## 📖 Introduce
 
 This project is dedicated to previewing any file format on the `Vue3` framework, supporting file previews such as docx,
