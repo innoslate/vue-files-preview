@@ -1,6 +1,6 @@
 {
   "name": "vue-files-preview-inno",
-  "version": "1.0.3-8.4",
+  "version": "1.0.3-8.5",
   "private": false,
   "description": "A tool for previewing files such as doc, excel, pdf, image, markdown, txt, audio, and video and so on.",
   "author": "Innoslate",
