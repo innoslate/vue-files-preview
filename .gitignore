@@ -24,7 +24,6 @@ dist-ssr
 # lock
 pnpm-lock.yaml
 yarn.lock
-package-lock.json
 
 # version ts
 packages/version.ts
