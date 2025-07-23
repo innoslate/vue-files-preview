@@ -63,10 +63,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Step 7: Publish the new version to npm
+      # Step 7: tsc
+      - name: Building TSC
+        run: tsc
+
+      # Step 8: Building Dist Folder
+      - name: Building Dist Folder
+        run: npm run build
+
+      # Step 9: Publish the new version to npm
       # The NODE_AUTH_TOKEN is your npm access token stored as a secret.
       # npm publish --access public makes the package available to anyone on npm.
       - name: Publish to npm
-        run: npm publish --access public
+        run: npm publish ./dist --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
