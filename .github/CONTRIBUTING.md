@@ -1,5 +1,3 @@
-[中文](./CONTRIBUTING_CN.md) · **English**
-
 # Contributor
 
 If you would like to contribute to our project, please carefully read the following development conventions. Only when we have a consensus can our project get better and better!
