@@ -1,2 +1,0 @@
-"use strict";const e=require("./index.vue2.js");;/* empty css            */const r=require("../../../../_virtual/_plugin-vue_export-helper.js"),t=r(e,[["__scopeId","data-v-f93f7148"]]);module.exports=t;
-//# sourceMappingURL=index.vue.js.map
