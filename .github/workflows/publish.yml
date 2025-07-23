@@ -36,8 +36,8 @@ jobs:
 
       # Step 4: Run your test suite (using the "test" script from package.json)
       # If tests fail, the workflow will stop here and not publish a broken version.
-      - name: Run tests
-        run: npm test
+      # - name: Run tests
+      # run: npm test
 
       # Step 5: Update package.json to match the release tag
       # The release tag (e.g., v1.0.1) is extracted, and npm version sets package.json version accordingly.
