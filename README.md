@@ -16,8 +16,8 @@ Forked from SmallTeddy vue-files-preview
 </p>
 
 ## 📖 Building for Node
-<p> 1. Run in terminal: tsc </p>
-<p> 2. Run in terminal: npm run build </p>
+<p> 1. Run in terminal : tsc </p>
+<p> 2. Run in terminal : npm run build </p>
 <p> 3. (Optional) Run in terminal: npm publish ./dist </p>
 
 ## 📖 Introduce
