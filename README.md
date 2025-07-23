@@ -116,25 +116,14 @@ const beforeFileUpload = (rawFile) => {
 
 ### Page
 
-![测试默认界面](assets/images/readme/default.png)
+![Test the default interface](assets/images/readme/default.png)
 
 This demo is already here [vue-files-preview-demo](https://github.com/VueFilesPreview/vue-files-preview-demo), click to
 view it.
 
 ## doc、xls、ppt preview
-
 Be pending
-
 ## docx、xlsx、pdf preview
-
-Using [Vue Office](https://github.com/501351981/vue-office?tab=readme) to implement preview of doc, excel, and pdf files
-
-<p style="text-align: center">
-  <img src="assets/images/readme/docx.png" alt="docx preview" style="width: 30%" />
-  <img src="assets/images/readme/xlsx.png" alt="xlsx preview" style="width: 30%" />
-  <img src="assets/images/readme/pdf.png" alt="pdf preview" style="width: 30%" />
-<p>
-
 ## audio、video preview
 
 use nature audio tag and canvas to implement the audio preview
@@ -142,8 +131,6 @@ use nature audio tag and canvas to implement the audio preview
 ![audio preview](assets/images/readme/audio.png)
 
 use nature video tag to implement the video preview (just support mp4)
-
-![video preview](assets/images/readme/video.png)
 
 ## image preview
 
@@ -184,14 +171,10 @@ ultimately adopted the [markdown-it](https://github.com/markdown-it/markdown-it)
 
 Currently, there may still be issues with formulas and other aspects, which will be further optimized in the future
 
-![markdown preview](assets/images/readme/md.png)
-
 ## epub preview
 
 using [epubjs](http://epubjs.org/documentation/0.3/) to adapt to EPUB file preview and configure page-flipping function
 for secondary development
-
-![epub preview](assets/images/readme/epub.png)
 
 ## 🌸 Thanks
 
