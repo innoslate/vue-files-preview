@@ -56,7 +56,7 @@ watch(
     {immediate: true},
 )
 
-// epub翻页
+// epub
 function prevPage(): void {
   if (rendition.value) {
     rendition.value.prev()
