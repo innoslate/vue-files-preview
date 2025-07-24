@@ -60,8 +60,8 @@ function audioPlay() {
   audioDom.value.onplay = () => {
     if (isInit.value)
       return
-    const audCtx = new AudioContext() // 音频上下文
-    const source = audCtx.createMediaElementSource(audioDom.value) // 音频源节点
+    const audCtx = new AudioContext()
+    const source = audCtx.createMediaElementSource(audioDom.value)
     analyser.value = audCtx.createAnalyser()
     analyser.value.fftSize = 512
     dataSource.value = new Uint8Array(analyser.value.frequencyBinCount)
