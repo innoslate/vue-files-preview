@@ -1,5 +1,5 @@
 ---
-name: 'Feature request（新需求）'
+name: 'Feature request'
 about: 'Suggest an idea for this project'
 title: '[Feature Request] say something'
 labels: ''
