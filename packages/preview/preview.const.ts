@@ -1,18 +1,21 @@
+import type { IPreviewRule } from './preview.interface'
+import { PreviewType } from './preview.interface'
+import AudioPreview from './supports/audio-preview/index'
+import CodePreview from './supports/code-preview/index'
 import DocxPreview from './supports/docx-preview/index'
-import XlsxPreview from './supports/xlsx-preview/index'
+import EpubPreview from './supports/epub-preview/index'
+import MdPreview from './supports/md-preview/index'
 import PdfPreview from './supports/pdf-preview/index'
 import PicPreview from './supports/pic-preview/index'
 import TxtPreview from './supports/txt-preview/index'
-import CodePreview from './supports/code-preview/index'
-import MdPreview from './supports/md-preview/index'
-import EpubPreview from './supports/epub-preview/index'
-import AudioPreview from './supports/audio-preview/index'
+import UnknownPreview from './supports/unknown-preview/index'
+import MsgPreview from './supports/msg-preview/index'
+import PptPreview from './supports/ppt-preview/index'
 import VideoPreview from './supports/video-preview/index'
-import type {IPreviewRule} from './preview.interface'
-import {PreviewType} from './preview.interface'
+import XlsxPreview from './supports/xlsx-preview/index'
 
 export const textFilePreviewTypeList = [PreviewType.CODE, PreviewType.TXT, PreviewType.MD]
-export const arrayBufferPreviewTypeList = [PreviewType.DOC, PreviewType.DOCX, PreviewType.XLSX, PreviewType.PPT, PreviewType.EPUB]
+export const arrayBufferPreviewTypeList = [PreviewType.DOC, PreviewType.DOCX, PreviewType.XLSX, PreviewType.PPT, PreviewType.EPUB, PreviewType.MSG]
 export const imagePreviewTypeList = [PreviewType.PIC, PreviewType.AUDIO]
 export const pdfPreviewTypeList = [PreviewType.PDF]
 export const videoPreviewTypeList = [PreviewType.VIDEO]
@@ -20,7 +23,7 @@ export const videoPreviewTypeList = [PreviewType.VIDEO]
 export const PreviewRules: Record<PreviewType, IPreviewRule> = {
     [PreviewType.NONE]: {
         name: '',
-        component: void 0,
+        component: UnknownPreview,
         type: PreviewType.NONE,
         accept: [],
     },
@@ -32,7 +35,7 @@ export const PreviewRules: Record<PreviewType, IPreviewRule> = {
     },
     [PreviewType.DOC]: {
         name: '',
-        component: void 0,
+        component: UnknownPreview,
         type: PreviewType.DOC,
         accept: ['doc', 'docm', 'dot', 'dotm', 'dotx', 'fodt', 'mht', 'odt', 'ott', 'rtf', 'djvu', 'xps'],
     },
@@ -51,7 +54,7 @@ export const PreviewRules: Record<PreviewType, IPreviewRule> = {
     // ppt: presentation
     [PreviewType.PPT]: {
         name: '',
-        component: void 0,
+        component: PptPreview,
         type: PreviewType.PPT,
         accept: ['ppt', 'pptx', 'fodp', 'odp', 'otp', 'pot', 'potm', 'potx', 'pps', 'ppsm', 'ppsx', 'pptm'],
     },
@@ -96,6 +99,12 @@ export const PreviewRules: Record<PreviewType, IPreviewRule> = {
         component: VideoPreview,
         type: PreviewType.VIDEO,
         accept: ['mp4', 'webm', 'ogg', 'mkv', 'avi', 'mpeg', 'flv', 'mov', 'wmv'],
+    },
+    [PreviewType.MSG]: {
+        name: '',
+        component: MsgPreview,
+        type: PreviewType.MSG,
+        accept: ['msg'],
     },
 }
 

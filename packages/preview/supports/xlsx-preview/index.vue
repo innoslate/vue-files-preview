@@ -1,44 +1,76 @@
 <script lang="ts" setup>
-import VueOfficeExcel from '@vue-office/excel'
-import '@vue-office/excel/lib/index.css'
+import VueOfficeExcel from '@vue-office/excel/lib/v3/index.js'
+import '@vue-office/excel/lib/v3/index.css'
 import {ref, watch} from 'vue'
 import type {PreviewProps} from '../../preview.interface'
-import {getFileRenderByFile} from '../../utils/utils'
+import {getFileRenderByFile, getFileRenderByUrl} from '../../utils/utils'
+
+export interface ExcelOptions {
+  minColLength?: number
+  minRowLength?: number
+  showContextmenu?: boolean
+}
 
 const props = withDefaults(
-    defineProps<
-        PreviewProps & {
-      width?: string
-      height?: string
-    }
-    >(),
-    {
-      url: () => null,
-      file: () => null,
-    },
+  defineProps<
+    PreviewProps & {
+    width?: string
+    height?: string
+    options?: ExcelOptions
+    requestOptions?: Record<string, any>
+  }
+  >(),
+  {
+    url: () => null,
+    file: () => null,
+    options: () => ({}),
+    requestOptions: () => ({}),
+  },
 )
 const fileRender = ref(null)
 watch(
-    () => props.file,
-    (file) => {
-      if (file) {
-        getFileRenderByFile(file).then(render => (fileRender.value = render))
-      }
-    },
-    {immediate: true},
+  () => props.file,
+  (file) => {
+    if (file) {
+      getFileRenderByFile(file).then(render => (fileRender.value = render))
+    }
+  },
+  {immediate: true},
 )
 
-function renderedHandler(): void {}
+watch(
+  () => props.url,
+  (url) => {
+    if (url && !props.file) {
+      getFileRenderByUrl(url).then(render => (fileRender.value = render))
+    }
+  },
+  {immediate: true},
+)
 
-function errorHandler(): void {}
+const emit = defineEmits<{
+  rendered: []
+  error: [error: Error]
+}>()
+
+function renderedHandler(): void {
+  emit('rendered')
+}
+
+function errorHandler(e: Error): void {
+  emit('error', e)
+}
 </script>
 
 <template>
   <div class="xlsx-preview">
-    <VueOfficeExcel :src="fileRender" @rendered="renderedHandler" @error="errorHandler"/>
+    <VueOfficeExcel :src="fileRender" :options="options" :requestOptions="requestOptions" @rendered="renderedHandler" @error="errorHandler"/>
   </div>
 </template>
 
 <style scoped lang="scss">
-
+.xlsx-preview {
+  width: 100%;
+  height: 100%;
+}
 </style>
