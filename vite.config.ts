@@ -14,6 +14,14 @@ export default defineConfig({
         alias: {
             '@src': pathSrc,
             '@packages': pathPackages,
+            'buffer': 'buffer/',
+        },
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: 'modern-compiler',
+            },
         },
     },
     plugins: [
