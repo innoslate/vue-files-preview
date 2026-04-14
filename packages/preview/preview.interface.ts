@@ -27,9 +27,10 @@ export enum PreviewType {
     PPT = 'ppt',
     AUDIO = 'audio',
     VIDEO = 'video',
+    MSG = 'msg',
 }
 
-// render
+// render the type used during reading
 export type FileRenderType = 'text' | 'image' | 'pdf' | 'arrayBuffer' | 'video'
 
 // endregion
@@ -37,8 +38,8 @@ export type FileRenderType = 'text' | 'image' | 'pdf' | 'arrayBuffer' | 'video'
 // region common
 // Preview component basic properties Extended property usage & implementation
 export interface PreviewProps {
-    // accept file object
-    file?: File
+    // Accepts file objects (supports File and Blob).
+    file?: File | Blob
     // Link
     url?: string
     // File Name

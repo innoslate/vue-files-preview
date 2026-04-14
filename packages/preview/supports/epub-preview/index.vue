@@ -2,20 +2,25 @@
 import {ref, watch} from 'vue'
 import ePub from 'epubjs'
 import type {PreviewProps} from '../../preview.interface'
-import {getFileRenderByFile} from '../../utils/utils'
+import {getFileRenderByFile, getFileRenderByUrl} from '../../utils/utils'
 
 const props = withDefaults(
-    defineProps<PreviewProps & {
-      width?: string
-      height?: string
-    }>(),
-    {
-      url: () => null,
-      file: () => null,
-      width: () => '100%',
-      height: () => '100%',
-    },
+  defineProps<PreviewProps & {
+    width?: string
+    height?: string
+  }>(),
+  {
+    url: () => null,
+    file: () => null,
+    width: () => '100%',
+    height: () => '100%',
+  },
 )
+
+const emit = defineEmits<{
+  rendered: []
+  error: [error: Error]
+}>()
 
 const navigation = ref()
 const locations = ref()
@@ -25,35 +30,52 @@ const bookAvailable = ref(false)
 const book = ref()
 const rendition = ref()
 
-function initEpub(): void {
-  if (props.file) {
-    getFileRenderByFile(props.file).then((render) => {
-      book.value = ePub(render as ArrayBuffer)
-      rendition.value = book.value.renderTo('epub-viewer', {
-        // Scroll mode
-        width: '100%',
-        height: 'calc(100vh - 80x)',
-        flow: 'scrolled',
-        allowScriptedContent: true,
-      })
-      book.value.ready.then(() => {
-        navigation.value = book.value.navigation
-        locations.value = book.value.locations
-        bookAvailable.value = true
-        // Get the total number of pages
-        totalPages.value = locations.value.length()
-        rendition.value.display()
-      })
-    })
-  }
+function renderEpub(content: ArrayBuffer | string): void {
+  book.value = ePub(content as ArrayBuffer)
+  rendition.value = book.value.renderTo('epub-viewer', {
+    width: '100%',
+    height: 'calc(100vh - 80px)',
+    flow: 'scrolled',
+    allowScriptedContent: true,
+  })
+  book.value.ready.then(() => {
+    navigation.value = book.value.navigation
+    locations.value = book.value.locations
+    bookAvailable.value = true
+    totalPages.value = locations.value.length()
+    rendition.value.display()
+    emit('rendered')
+  }).catch((e: Error) => {
+    emit('error', e)
+  })
 }
 
 watch(
-    () => props.file,
-    () => {
-      initEpub()
-    },
-    {immediate: true},
+  () => props.file,
+  (file) => {
+    if (file) {
+      getFileRenderByFile(file).then((render) => {
+        renderEpub(render)
+      }).catch((e: Error) => {
+        emit('error', e)
+      })
+    }
+  },
+  {immediate: true},
+)
+
+watch(
+  () => props.url,
+  (url) => {
+    if (url && !props.file) {
+      getFileRenderByUrl(url).then((render) => {
+        renderEpub(render)
+      }).catch((e: Error) => {
+        emit('error', e)
+      })
+    }
+  },
+  {immediate: true},
 )
 
 // epub
