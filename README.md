@@ -1,3 +1,7 @@
+When publishing make sure that the NPM_TOKEN secret has been updated within the last 90 days as it will have lapsed beyond that.
+The token needs to be made by username:innoslate, email: support@innoslate.com
+The token needs write permission to all packages and needs to bypass 2fa.
+
 <p align="right">
   <a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a>
 </p>
