@@ -4,7 +4,6 @@ import CodePreview from './code-preview/index.js'
 import DocxPreview from './docx-preview/index.js'
 import EpubPreview from './epub-preview/index.js'
 import MdPreview from './md-preview/index.js'
-import MsgPreview from './msg-preview/index.js'
 import PdfPreview from './pdf-preview/index.js'
 import PicPreview from './pic-preview/index.js'
 import TxtPreview from './txt-preview/index.js'
@@ -18,7 +17,6 @@ export {
     DocxPreview,
     EpubPreview,
     MdPreview,
-    MsgPreview,
     PdfPreview,
     PicPreview,
     TxtPreview,

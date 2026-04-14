@@ -8,22 +8,12 @@ const props = withDefaults(defineProps<PreviewProps>(), {
   file: () => null,
 })
 
-const emit = defineEmits<{
-  rendered: []
-  error: [error: Error]
-}>()
-
 const fileRender = ref(null)
 watch(
   () => props.file,
   (file) => {
     if (file) {
-      getFileRenderByFile(file).then((render) => {
-        fileRender.value = render
-        emit('rendered')
-      }).catch((e: Error) => {
-        emit('error', e)
-      })
+      getFileRenderByFile(file).then(render => (fileRender.value = render))
     }
   },
   { immediate: true },
@@ -34,7 +24,6 @@ watch(
   (url) => {
     if (url) {
       fileRender.value = url
-      emit('rendered')
     }
   },
   { immediate: true },

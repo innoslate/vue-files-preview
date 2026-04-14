@@ -1,21 +1,15 @@
 <script lang='ts' setup>
-import {computed, getCurrentInstance, onMounted, ref, watch} from 'vue'
+import {computed, getCurrentInstance, onBeforeMount, onMounted, ref} from 'vue'
 import type {PreviewProps} from '../../preview.interface'
-import {getFileRenderByFile, getFileRenderByUrl} from '../../utils/utils'
+import {getFileRenderByFile} from '../../utils/utils'
 
 const props = withDefaults(
-  defineProps<PreviewProps>(),
-  {
-    url: () => null,
-    file: () => null,
-    name: () => null,
-  },
+    defineProps<PreviewProps>(),
+    {
+      file: () => null,
+      name: () => null,
+    },
 )
-
-const emit = defineEmits<{
-  rendered: []
-  error: [error: Error]
-}>()
 
 const {proxy} = getCurrentInstance() as any
 
@@ -141,35 +135,11 @@ function changeMode() {
   mode.value == 'Columnar' ? drawColumnar() : drawWavy()
 }
 
-watch(
-  () => props.file,
-  (file) => {
-    if (file) {
-      getFileRenderByFile(file).then((render) => {
-        src.value = render
-        emit('rendered')
-      }).catch((e: Error) => {
-        emit('error', e)
-      })
-    }
-  },
-  {immediate: true},
-)
-
-watch(
-  () => props.url,
-  (url) => {
-    if (url && !props.file) {
-      getFileRenderByUrl(url).then((render) => {
-        src.value = render
-        emit('rendered')
-      }).catch((e: Error) => {
-        emit('error', e)
-      })
-    }
-  },
-  {immediate: true},
-)
+onBeforeMount(() => {
+  getFileRenderByFile(props.file).then((render) => {
+    src.value = render
+  })
+})
 onMounted(() => {
   initDom() // Initialization Dom
   audioPlay() // Audio playback
@@ -187,12 +157,12 @@ onMounted(() => {
         </div>
       </div>
       <div class="mp3Box">
-        <audio ref="audioRef" controls :src="src" crossorigin="anonymous"/>
+        <audio ref="audioRef" controls :src="src"/>
       </div>
       <div>
-        <button class="mode-btn" @click="changeMode">
+        <el-button link @click="changeMode">
           {{ mode }}
-        </button>
+        </el-button>
       </div>
     </div>
     <div class="cvs-container">
@@ -292,21 +262,5 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.mode-btn {
-  padding: 6px 12px;
-  background: transparent;
-  border: 1px solid #666;
-  border-radius: 4px;
-  color: #999;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
-
-  &:hover {
-    color: #fff;
-    border-color: #999;
-  }
 }
 </style>

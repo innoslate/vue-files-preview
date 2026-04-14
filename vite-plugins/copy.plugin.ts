@@ -1,23 +1,18 @@
-import {copyFileSync, readFileSync, writeFileSync} from 'node:fs'
-import {dirname, join} from 'node:path'
-import {fileURLToPath} from 'node:url'
+import {copyFileSync, writeFileSync} from 'node:fs'
+import {join} from 'node:path'
 import type {Plugin} from 'vite'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export function copyPackageJsonPlugin(): Plugin {
     return {
         name: 'copy-package-json',
         closeBundle() {
             try {
-                const packageJson = JSON.parse(readFileSync(join(__dirname, '../package.json'), 'utf-8'))
+                const packageJson = require('../package.json')
                 const distPackageJson = {
                     name: packageJson.name,
                     version: packageJson.version,
                     main: './es/packages/index.mjs',
                     module: './es/packages/index.mjs',
-                    unpkg: './umd/vue-files-preview.umd.js',
-                    jsdelivr: './umd/vue-files-preview.umd.js',
                     types: './types/index.d.ts',
                     exports: {
                         '.': {
@@ -70,11 +65,11 @@ export function copyPackageJsonPlugin(): Plugin {
                     homepage: packageJson.homepage,
                 }
 
-                // Write distPackageJson to the dist directory.
+                // distPackageJson
                 writeFileSync(join(__dirname, '../dist', 'package.json'), JSON.stringify(distPackageJson, null, 2))
                 console.log('package.json copied and modified successfully!')
 
-                // If necessary, you can copy other files—such as README.md—to the `dist` directory.
+                // README.md
                 copyFileSync(join(__dirname, '../README.md'), join(__dirname, '../dist', 'README.md'))
             } catch (error) {
                 console.error('Error while copying and modifying package.json:', error)
