@@ -7,6 +7,7 @@ import MdPreview from './md-preview/index.js'
 import MsgPreview from './msg-preview/index.js'
 import PdfPreview from './pdf-preview/index.js'
 import PicPreview from './pic-preview/index.js'
+import PptPreview from './ppt-preview/index.js'
 import TxtPreview from './txt-preview/index.js'
 import VideoPreview from './video-preview/index.js'
 import XlsxPreview from './xlsx-preview/index.js'
@@ -21,6 +22,7 @@ export {
     MsgPreview,
     PdfPreview,
     PicPreview,
+    PptPreview,
     TxtPreview,
     VideoPreview,
     XlsxPreview,
